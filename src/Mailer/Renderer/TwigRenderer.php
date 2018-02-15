@@ -22,15 +22,15 @@ class TwigRenderer implements Renderer
         /** @var TwigEmail $email */
         $template = $this->twig->load($email->getTemplate());
 
-        if ($template->hasBlock(TwigEmail::BLOCK_SUBJECT)) {
+        if ($template->hasBlock(TwigEmail::BLOCK_SUBJECT, [])) {
             $email->setSubject($template->renderBlock(TwigEmail::BLOCK_SUBJECT, $context));
         }
 
-        if ($template->hasBlock(TwigEmail::BLOCK_CONTENT)) {
+        if ($template->hasBlock(TwigEmail::BLOCK_CONTENT, [])) {
             $email->setContent($template->renderBlock(TwigEmail::BLOCK_CONTENT, $context));
         }
 
-        if ($template->hasBlock(TwigEmail::BLOCK_PLAIN_TEXT_CONTENT)) {
+        if ($template->hasBlock(TwigEmail::BLOCK_PLAIN_TEXT_CONTENT, [])) {
             $email->setPlainTextContent($template->renderBlock(TwigEmail::BLOCK_PLAIN_TEXT_CONTENT, $context));
         }
 
@@ -44,7 +44,7 @@ class TwigRenderer implements Renderer
             );
         }
 
-        if ($template->hasBlock(TwigEmail::BLOCK_HEADERS)) {
+        if ($template->hasBlock(TwigEmail::BLOCK_HEADERS, [])) {
             $headers = $template->renderBlock(TwigEmail::BLOCK_HEADERS, $context);
             $headers = HeadersUtils::parseHeadersFromString($headers);
             $email->replaceHeaders($headers);
